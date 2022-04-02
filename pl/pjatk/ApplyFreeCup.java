@@ -10,7 +10,7 @@ public class ApplyFreeCup implements ICanCalculateSpecialOffer{
 
     @Override
     public void calculateOffer(Cart cart) {
-        Product cup = new Product("999", "kubek", 0, 0);
+        Product cup = new Product("999", "Kubek", 0, 0);
         cart.addNewProductToCart(cup);
     }
 }

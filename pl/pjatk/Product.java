@@ -13,6 +13,12 @@ public class Product {
         this.discountPrice = price;
     }
 
+    public Product(String code, String name, double price) {
+        this.code = code;
+        this.name = name;
+        this.price = price;
+    }
+
     public Product() {
 
     }
