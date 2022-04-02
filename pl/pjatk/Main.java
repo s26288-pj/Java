@@ -35,6 +35,7 @@ public class Main {
         CartSystem cartSystem = new CartSystem();
 
         System.out.println("Cart after discount: ");
+
         ICanCalculateSpecialOffer discount300Plus = new Discount300Plus();
         ICanCalculateSpecialOffer freeCup = new ApplyFreeCup();
         ICanCalculateSpecialOffer thirdForFree = new ApplyDiscountThirdForFree();
