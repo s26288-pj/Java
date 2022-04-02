@@ -2,6 +2,7 @@ package pl.pjatk;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Main {
 
@@ -34,7 +35,7 @@ public class Main {
         // Wywołanie koszyka
         CartSystem cartSystem = new CartSystem();
 
-        System.out.println("Cart after discount: ");
+//        System.out.println("Cart after discount: ");
 
         ICanCalculateSpecialOffer discount300Plus = new Discount300Plus();
         ICanCalculateSpecialOffer freeCup = new ApplyFreeCup();
@@ -43,11 +44,13 @@ public class Main {
         cart.applyDiscount(thirdForFree);
         cart.applyDiscount(freeCup);
 
-        System.out.println(cart.toString());
+        // Wyświetlenie aktualnego koszyka
+//        System.out.println(cart.toString());
 
+        // Tworzenie faktury - dodawanie produktów
         Invoice invoice = new Invoice();
         invoice.addPosition(new Product("produkt 1", "TV", 1000));
-        invoice.addPosition(new Product("produkt 2", "TV", 1200));
+        invoice.addPosition(new Product("produkt 1", "TV", 1000));
         invoice.addPosition(new Product("produkt 3", "Radio", 100));
         invoice.addPosition(new Product("produkt 4", "Sluchawki", 250));
         invoice.addPosition(new Product("produkt 5", "Myszka", 80));
@@ -55,17 +58,23 @@ public class Main {
 
     }
 
+    // Drukowanie faktury
     private static void printoutInvoice(Invoice invoice) {
-        System.out.println("| NAZWA\t | ILOSC\t | CENA\t | CENA NETTO\t | CENA BRUTTO\t | STAWKA VAT\t | PODATEK\t |");
-        System.out.println("****************************************************************************************");
+        double sum = 0;
+        System.out.println("Data wystawienia faktury nr 2022/04/02/001: " + java.time.LocalDate.now());
+        System.out.println("| NAZWA\t | ILOSC\t | CENA NETTO\t | CENA BRUTTO\t | STAWKA VAT\t | PODATEK\t |");
+        System.out.println("*******************************************************************************");
         for(InvoicePosition p : invoice.getPositions()) {
             System.out.print("| " + p.getProduct().getName() + "\t | ");
             System.out.print(p.getCount() + "\t | ");
             System.out.print(p.getNettoPrice() + "\t | ");
             System.out.print(p.getGrossPrice() + "\t | ");
+            sum += p.getGrossPrice();
             System.out.print(p.getTax() + "\t | ");
             System.out.println(p.getTaxValue() + "\t |");
         }
-        System.out.println("****************************************************************************************");
+        System.out.println();
+        System.out.println("Suma brutto tej faktury: " + sum);
+        System.out.println("*******************************************************************************");
     }
 }
